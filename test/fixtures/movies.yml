@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  realease_date: 2015-10-14
+  studio: MyString
+
+two:
+  title: MyString
+  description: MyText
+  realease_date: 2015-10-14
+  studio: MyString
