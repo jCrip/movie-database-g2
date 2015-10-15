@@ -2,3 +2,9 @@ LOG:  database system was shut down at 2015-10-15 17:33:19 CLT
 LOG:  MultiXact member wraparound protections are now enabled
 LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
+ERROR:  database "IMDB_development" is being accessed by other users
+DETAIL:  There are 2 other sessions using the database.
+STATEMENT:  DROP DATABASE IF EXISTS "IMDB_development"
+ERROR:  database "IMDB_development" is being accessed by other users
+DETAIL:  There is 1 other session using the database.
+STATEMENT:  DROP DATABASE IF EXISTS "IMDB_development"
