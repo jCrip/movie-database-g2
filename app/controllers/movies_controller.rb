@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
-    @reviews = @movie.reviews
+    @reviews = @movie.reviews.reverse
   end
 
   # GET /movies/new

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :movies
+  resources :movies do
+    resources :reviews, only: [:create]
+  end
+
+  #post 'movies/:movie_id/reviews', to: 'reviews#create', as: 'movie_reviews'
 
   root 'movies#index'
   # The priority is based upon order of creation: first created -> highest priority.
