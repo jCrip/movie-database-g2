@@ -25,7 +25,7 @@
           <td><%= check_box_tag 'movies_ids[]', movie.id %></td>
           <td><%= movie.title %></td>
           <td><%= movie.genres.join(', ') %></td>
-          <td><%= movie.realease_date %></td>
+          <td><%= time_tag movie.realease_date, movie.realease_date.strftime('%Y') %></td>
           <td><%= movie.studio %></td>
           <td><%= link_to 'Show', movie %></td>
           <td><%= link_to 'Edit', edit_movie_path(movie) %></td>

@@ -80,7 +80,7 @@
 
 <% @reviews.each do |review| %>
 	<hr>
-	<p><small><%= review.created_at %></small></p>
+	<p><small><%= time_ago_in_words review.created_at %></small></p>
 	<p><%= review.content %></p>
 	<hr>
 <% end %>
