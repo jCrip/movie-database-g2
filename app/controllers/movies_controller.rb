@@ -1,16 +1,19 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy, :set_genre]
 
   # GET /movies
   # GET /movies.json
   def index
     @movies = Movie.all
+    @genres = Genre.all
   end
 
   # GET /movies/1
   # GET /movies/1.json
   def show
     @reviews = @movie.reviews.reverse
+    @genres = Genre.all
+    @movie_genres = @movie.genres
   end
 
   # GET /movies/new
@@ -60,6 +63,32 @@ class MoviesController < ApplicationController
       format.html { redirect_to movies_url, notice: 'Movie was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def set_genre
+
+    if params.key?(:genres_ids) && !params[:genres_ids].empty?
+      @genres = Genre.find(params[:genres_ids])
+      @movie.genres = @genres
+    else
+      @movie.genres.clear
+    end
+
+    redirect_to @movie
+  end
+
+  def set_genres
+    if params.key?(:genres_ids) && !params[:genres_ids].empty? && params.key?(:movies_ids) && !params[:movies_ids].empty?
+      @movies = Movie.find(params[:movies_ids])
+      @genres = Genre.find(params[:genres_ids])
+      @movies.each do |movie|
+        movie.genres = @genres
+      end
+      redirect_to root_path, notice: 'Genero(s) asignado correctamente.'
+    else
+      redirect_to root_path, alert: 'Tienes que seleccionar al menos un genero y una pelicula'
+    end
+
   end
 
   private

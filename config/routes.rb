@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   resources :movies do
     resources :reviews, only: [:create]
+
+    member do
+      post 'set_genre'
+    end
+
+    collection do
+      post 'set_genres'
+    end
   end
 
   #post 'movies/:movie_id/reviews', to: 'reviews#create', as: 'movie_reviews'

@@ -23,6 +23,35 @@
 <%= link_to 'Edit', edit_movie_path(@movie) %> |
 <%= link_to 'Back', movies_path %>
 
+<h2>Genero</h2>
+
+<%= form_tag set_genre_movie_path(@movie) do %>
+	<table>
+		<thead>
+			<tr>
+				<th>Genero</th>
+				<th>Selecionar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @genres.each do |genre| %>
+				<% if @movie_genres.include? genre %>
+					<tr>
+						<td><%= genre.name %></td>
+						<td><%= check_box_tag 'genres_ids[]', genre.id, 'Yes' %></td>
+					</tr>
+				<% else %>
+					<tr>
+						<td><%= genre.name %></td>
+						<td><%= check_box_tag 'genres_ids[]', genre.id %></td>
+					</tr>
+				<% end %>
+			<% end %>
+		</tbody>
+	</table>
+	<%= submit_tag 'Guardar' %>
+<% end %>
+
 
 <h2>Deja tu review</h2>
 

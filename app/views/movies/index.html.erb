@@ -1,33 +1,40 @@
 <p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
 
 <h1>Listing Movies</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Realease date</th>
-      <th>Studio</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= form_tag set_genres_movies_path do %>
+  <%= select_tag 'genres_ids[]', options_from_collection_for_select(@genres, 'id', 'name'), prompt: "Seleciona el/los generos", multiple: true %>
 
-  <tbody>
-    <% @movies.each do |movie| %>
+  <%= submit_tag "Guardar" %>
+
+  <table>
+    <thead>
       <tr>
-        <td><%= movie.title %></td>
-        <td><%= movie.description %></td>
-        <td><%= movie.realease_date %></td>
-        <td><%= movie.studio %></td>
-        <td><%= link_to 'Show', movie %></td>
-        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th colspan="2">Title</th>
+        <th>Genres</th>
+        <th>Realease date</th>
+        <th>Studio</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% @movies.each do |movie| %>
+        <tr>
+          <td><%= check_box_tag 'movies_ids[]', movie.id %></td>
+          <td><%= movie.title %></td>
+          <td><%= movie.genres.join(', ') %></td>
+          <td><%= movie.realease_date %></td>
+          <td><%= movie.studio %></td>
+          <td><%= link_to 'Show', movie %></td>
+          <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
+          <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 <br>
 
 <%= link_to 'New Movie', new_movie_path %>
