@@ -8,4 +8,6 @@ class Movie < ActiveRecord::Base
   validates :title, presence: true
   validates :realease_date, presence: true
   validates :studio, presence: true
+
+  default_scope { order(realease_date: :desc) }
 end
