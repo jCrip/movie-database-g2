@@ -14,3 +14,7 @@ LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
 ERROR:  cached plan must not change result type
 STATEMENT:  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1
+ERROR:  cached plan must not change result type
+STATEMENT:  SELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1  ORDER BY "movies"."realease_date" DESC LIMIT 1
+ERROR:  cached plan must not change result type
+STATEMENT:  SELECT "reviews".* FROM "reviews" WHERE "reviews"."movie_id" = $1

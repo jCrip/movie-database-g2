@@ -1,6 +1,7 @@
 <p>
   <strong>Title:</strong>
   <%= @movie.title %>
+  by <%= @movie.user %>
 </p>
 
 <p>
@@ -78,7 +79,8 @@
 
 <% @reviews.each do |review| %>
 	<hr>
-	<p><small><%= time_ago_in_words review.created_at %></small></p>
+	<p><small>Creado hace <%= time_tag review.created_at, time_ago_in_words(review.created_at) %></small></p>
 	<p><%= review.content %></p>
+	<small>by: <%= review.user %></small>
 	<hr>
 <% end %>
