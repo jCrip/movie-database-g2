@@ -9,12 +9,19 @@ class User < ActiveRecord::Base
   has_many :movies
   has_many :reviews
 
-  validates :username, uniqueness: true
+  validates :username, uniqueness: { case_sensitive: false }
+  validate :validate_username
 
   enum role: [:admin, :editor, :user]
 
   def default_role
     self.role ||= 2
+  end
+
+  def validate_username
+    if User.where(email: username).exists?
+      errors.add(:username, :invalid)
+    end
   end
 
   def to_s
