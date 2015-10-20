@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  devise_scope :user do
+    get '/login', to: 'users/sessions#new'
+    get '/sign_up', to: 'users/registrations#new'
+    delete "/logout", to: 'users/sessions#destroy'
+    get 'profile', to: 'users/registrations#edit'
+    put 'profile', to: 'users/registrations#update'
+  end
+
   resources :movies do
     resources :reviews, only: [:create]
 
