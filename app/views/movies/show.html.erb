@@ -19,8 +19,12 @@
   <%= @movie.studio %>
 </p>
 
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<% if can? :edit, @movie %>
+	<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<% end %>
 <%= link_to 'Back', movies_path %>
+
+<% if can? :set_genre, @movie %>
 
 <h2>Genero</h2>
 
@@ -51,8 +55,9 @@
 	<%= submit_tag 'Guardar' %>
 <% end %>
 
+<% end %>
 
-<h2>Deja tu review</h2>
+
 
 <!-- <form action="/movies/<%#= @movie.id %>/reviews" method="POST">
 	<div>
@@ -69,11 +74,15 @@
 	<%#= submit_tag 'Enviar' %>
 <%# end %>
 
-<%= form_for [@movie, Review.new] do |f| %>
-	<%= f.label :content, "Review" %>
-	<%= f.text_area :content %>
-	<%= f.submit "Enviar" %>
+<% if can? :create, Review %>
+	<h2>Deja tu review</h2>
+	<%= form_for [@movie, Review.new] do |f| %>
+		<%= f.label :content, "Review" %>
+		<%= f.text_area :content %>
+		<%= f.submit "Enviar" %>
+	<% end %>
 <% end %>
+
 
 <h2>Reviews de la pelicula</h2>
 
