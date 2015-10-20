@@ -8,3 +8,9 @@ STATEMENT:  DROP DATABASE IF EXISTS "IMDB_development"
 ERROR:  database "IMDB_development" is being accessed by other users
 DETAIL:  There is 1 other session using the database.
 STATEMENT:  DROP DATABASE IF EXISTS "IMDB_development"
+LOG:  database system was shut down at 2015-10-19 17:22:35 CLT
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+ERROR:  cached plan must not change result type
+STATEMENT:  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1

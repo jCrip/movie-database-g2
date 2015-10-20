@@ -12,4 +12,22 @@ class ApplicationController < ActionController::Base
 
       devise_parameter_sanitizer.for(:account_update) << [:name, :lastname, :username]
     end
+
+  private
+
+    def check_admin!
+      authenticate_user!
+
+      unless current_user.admin?
+        redirect_to root_path, alert: 'No puedes hacer eso!!! No eres admin!!!'
+      end
+    end
+
+    def check_editor!
+      authenticate_user!
+
+      unless current_user.editor? || current_user.admin?
+        redirect_to root_path, alert: 'No puedes hacer eso, no eres editor ni admin'
+      end
+    end
 end
