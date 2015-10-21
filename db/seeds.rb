@@ -43,14 +43,16 @@ genres << Genre.create(name: 'Documental')
 genres << Genre.create(name: 'Musical')
 genres << Genre.create(name: 'Animated')
 
+studios = ['American International Pictures', 'Blinding Edge Pictures', 'Blue Sky Studios', 'CBS Films', 'Cinemation Industries', 'Columbia Pictures Industries, Inc.', 'Compass International Pictures', 'Dimension Films', 'DreamWorks', 'Electric Entertainment', 'Embassy Pictures', 'Five & Two Pictures', 'Four Star Television', 'Fox Film Corporation', 'Fox Searchlight Pictures', 'Goldwyn Pictures', 'Hallmark Productions', 'Happy Madison Productions', 'Imagine Entertainment', 'Legendary Pictures', 'Lionsgate Entertainment', 'Metro Goldwyn Mayer', 'New Line Cinema', 'Original Film', 'Orion Pictures', 'Paramount Pictures', 'Republic Pictures', 'Skydance Productions', 'Sony Pictures Classics', 'Spyglass Entertainment', 'Square Pictures', 'Twentieth Century-Fox', 'Universal Studios', 'Disneynature', 'Lucasfilm', 'Marvel Studios', 'Pixar', 'Touchstone Pictures', 'Walt Disney Pictures', 'Warner Brothers', 'Western Film Exchange']
+
 movies = []
 
 (1..50).each do |m|
   movies << Movie.create(
-    title: Faker::Company.name,
+    title: Faker::Address.street_name,
     description: Faker::Lorem.paragraph(20, true, 10),
     realease_date: Faker::Date.between(20.years.ago, 1.week.ago),
-    studio: Faker::Name.name,
+    studio: studios[rand(studios.length)],
     user: users[rand(users.length)]
   )
 end
