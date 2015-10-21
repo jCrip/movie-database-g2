@@ -11,7 +11,11 @@
   <table>
     <thead>
       <tr>
+      <% if can? :set_genres, Movie %>
         <th colspan="2">Title</th>
+      <% else %>
+        <th>Title</th>
+      <% end %>
         <th>Genres</th>
         <th>Realease date</th>
         <th>Studio</th>
