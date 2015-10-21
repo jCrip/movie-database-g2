@@ -10,21 +10,24 @@ users << User.create(
   lastname: 'Pazos',
   username: 'juancri',
   email: 'admin@imdb.com',
-  password: 'password'
+  password: 'password',
+  role: 'admin'
 )
 users << User.create(
   name: 'Maida',
   lastname: 'Claro',
   username: 'mai_clear',
   email: 'editor@imdb.com',
-  password: 'password'
+  password: 'password',
+  role: 'editor'
 )
 users << User.create(
   name: 'Carlos',
   lastname: 'Anderson',
   username: 'neo',
   email: 'basic@imdb.com',
-  password: 'password'
+  password: 'password',
+  role: 'basic'
 )
 
 genres = []
