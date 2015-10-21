@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
+  load_and_authorize_resource
 
   def create
     movie = Movie.find(params[:movie_id])

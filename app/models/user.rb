@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: { case_sensitive: false }
   validate :validate_username
 
-  enum role: [:admin, :editor, :user]
+  enum role: [:admin, :editor, :basic, :guest]
 
   def default_role
     self.role ||= 2

@@ -1,9 +1,11 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: [:show, :edit, :update, :destroy, :set_genre]
+  # before_action :set_movie, only: [:show, :edit, :update, :destroy, :set_genre]
 
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :check_editor!, only: [:edit, :update]
-  before_action :check_admin!, only: [:destroy]
+  # before_action :authenticate_user!, except: [:index, :show]
+  # before_action :check_editor!, only: [:edit, :update]
+  # before_action :check_admin!, only: [:destroy]
+
+  load_and_authorize_resource
 
   # GET /movies
   # GET /movies.json

@@ -1,10 +1,13 @@
 <h1>Listing Movies</h1>
 
+
 <%= form_tag set_genres_movies_path do %>
+<% if can? :set_genres, Movie %>
   <%= select_tag 'genres_ids[]', options_from_collection_for_select(@genres, 'id', 'name'), prompt: "Seleciona el/los generos", multiple: true %>
 
   <%= submit_tag "Guardar" %>
 
+<% end %>
   <table>
     <thead>
       <tr>
@@ -19,16 +22,18 @@
     <tbody>
       <% @movies.each do |movie| %>
         <tr>
-          <td><%= check_box_tag 'movies_ids[]', movie.id %></td>
+          <% if can? :set_genres, Movie %>
+            <td><%= check_box_tag 'movies_ids[]', movie.id %></td>
+          <% end %>
           <td><%= movie.title %></td>
           <td><%= movie.genres.join(', ') %></td>
           <td><%= time_tag movie.realease_date, movie.realease_date.strftime('%Y') %></td>
           <td><%= movie.studio %></td>
-          <td><%= link_to 'Show', movie %></td>
-          <% if user_signed_in? && (current_user.editor? || current_user.admin?) %>
+          <td><%= link_to t(:show), movie %></td>
+          <% if can? :edit, movie %>
             <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
           <% end %>
-          <% if user_signed_in? && current_user.admin? %>
+          <% if can? :destroy, movie %>
             <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% end %>
         </tr>
@@ -38,6 +43,6 @@
 <% end %>
 <br>
 
-<% if user_signed_in? %>
+<% if can? :create, Movie %>
   <%= link_to 'New Movie', new_movie_path %>
 <% end %>
