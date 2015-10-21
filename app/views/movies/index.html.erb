@@ -29,7 +29,7 @@
           <td><%= movie.genres.join(', ') %></td>
           <td><%= time_tag movie.realease_date, movie.realease_date.strftime('%Y') %></td>
           <td><%= movie.studio %></td>
-          <td><%= link_to 'Show', movie %></td>
+          <td><%= link_to t(:show), movie %></td>
           <% if can? :edit, movie %>
             <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
           <% end %>
