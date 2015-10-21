@@ -48,7 +48,7 @@ movies = []
 (1..50).each do |m|
   movies << Movie.create(
     title: Faker::Company.name,
-    description: Faker::Lorem.paragraph(3),
+    description: Faker::Lorem.paragraph(20, true, 10),
     realease_date: Faker::Date.between(20.years.ago, 1.week.ago),
     studio: Faker::Name.name,
     user: users[rand(users.length)]
