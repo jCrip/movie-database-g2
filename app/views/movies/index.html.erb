@@ -35,10 +35,10 @@
           <td><%= movie.studio %></td>
           <td><%= link_to t(:show), movie %></td>
           <% if can? :edit, movie %>
-            <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
+            <td><%= link_to t(:edit), edit_movie_path(movie) %></td>
           <% end %>
           <% if can? :destroy, movie %>
-            <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to t(:destroy), movie, method: :delete, data: { confirm: t(:confirmation) } %></td>
           <% end %>
         </tr>
       <% end %>
@@ -47,6 +47,4 @@
 <% end %>
 <br>
 
-<% if can? :create, Movie %>
-  <%= link_to 'New Movie', new_movie_path %>
-<% end %>
+<%= link_to t(:new), new_movie_path if can? :create, Movie %>

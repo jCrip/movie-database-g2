@@ -1,6 +1,10 @@
 es:
   login: Entrar
   show: Ver
+  edit: Editar
+  destroy: Eliminar
+  new: Crear Pelicula
+  confirmation: Estas seguro?
   date:
     abbr_day_names:
     - dom
