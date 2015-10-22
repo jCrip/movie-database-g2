@@ -13,10 +13,15 @@ Rails.application.routes.draw do
   end
 
   resources :movies do
-    resources :reviews, only: [:create]
+    resources :reviews, only: [:create] do
+      member do
+        get 'like'
+      end
+    end
 
     member do
       post 'set_genre'
+      get 'like'
     end
 
     collection do
