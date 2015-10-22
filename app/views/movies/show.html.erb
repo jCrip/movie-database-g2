@@ -24,72 +24,21 @@
 <% end %>
 <%= link_to 'Back', movies_path %>
 
+<p>Me Gusta: <strong><%= @movie.likes.count %></strong></p>
+
+<% if can? :like, Movie %>
+	<%= render partial: "likes/action" %>
+<% end %>
+
 <% if can? :set_genre, @movie %>
-
-<h2>Genero</h2>
-
-<%= form_tag set_genre_movie_path(@movie) do %>
-	<table>
-		<thead>
-			<tr>
-				<th>Genero</th>
-				<th>Selecionar</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @genres.each do |genre| %>
-				<% if @movie_genres.include? genre %>
-					<tr>
-						<td><%= genre.name %></td>
-						<td><%= check_box_tag 'genres_ids[]', genre.id, 'Yes' %></td>
-					</tr>
-				<% else %>
-					<tr>
-						<td><%= genre.name %></td>
-						<td><%= check_box_tag 'genres_ids[]', genre.id %></td>
-					</tr>
-				<% end %>
-			<% end %>
-		</tbody>
-	</table>
-	<%= submit_tag 'Guardar' %>
+	<%= render partial: "genres/form" %>
 <% end %>
-
-<% end %>
-
-
-
-<!-- <form action="/movies/<%#= @movie.id %>/reviews" method="POST">
-	<div>
-		<label for="content">Review</label>
-		<textarea name="content" id="content"></textarea>
-		<input type="hidden" name="authenticity_token" value="<%#= form_authenticity_token() %>">
-		<input type="submit" value="Enviar">
-	</div>
-</form> -->
-
-<%#= form_tag movie_reviews_path(@movie) do %>
-	<%#= label_tag :content, "Review" %>
-	<%#= text_area_tag :content %>
-	<%#= submit_tag 'Enviar' %>
-<%# end %>
 
 <% if can? :create, Review %>
-	<h2>Deja tu review</h2>
-	<%= form_for [@movie, Review.new] do |f| %>
-		<%= f.label :content, "Review" %>
-		<%= f.text_area :content %>
-		<%= f.submit "Enviar" %>
-	<% end %>
+	<%= render partial: 'reviews/form' %>
 <% end %>
 
 
 <h2>Reviews de la pelicula</h2>
 
-<% @reviews.each do |review| %>
-	<hr>
-	<p><small>Creado hace <%= time_tag review.created_at, time_ago_in_words(review.created_at) %></small></p>
-	<p><%= review.content %></p>
-	<small>by: <%= review.user %></small>
-	<hr>
-<% end %>
+<%= render partial: 'reviews/review', collection: @reviews %>

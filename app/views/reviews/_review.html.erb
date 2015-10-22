@@ -1,0 +1,16 @@
+<hr>
+<p><small>Creado hace <%= time_tag review.created_at, time_ago_in_words(review.created_at) %></small></p>
+<p><%= review.content %></p>
+<small>by: <%= review.user %></small>
+
+<p>Me Gusta: <strong><%= review.likes.count %></strong></p>
+<% if can? :like, Review %>
+	<p>Me gusta:
+		<% unless review.liked_by? current_user %>
+			<%= link_to '+1', like_movie_review_path(@movie, review)  %>
+		<% else %>
+			<%= link_to '-1', like_movie_review_path(@movie, review)  %>
+		<% end %>
+	</p>
+<% end %>
+<hr>

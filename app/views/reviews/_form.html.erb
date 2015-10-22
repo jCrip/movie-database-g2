@@ -1,0 +1,6 @@
+<h2>Deja tu review</h2>
+<%= form_for [@movie, Review.new] do |f| %>
+	<%= f.label :content, "Review" %>
+	<%= f.text_area :content %>
+	<%= f.submit "Enviar" %>
+<% end %>

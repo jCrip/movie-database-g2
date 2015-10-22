@@ -1,0 +1,16 @@
+<tr>
+  <% if can? :set_genres, Movie %>
+    <td><%= check_box_tag 'movies_ids[]', movie.id %></td>
+  <% end %>
+  <td><%= movie.title %></td>
+  <td><%= movie.genres.join(', ') %></td>
+  <td><%= time_tag movie.realease_date, movie.realease_date.strftime('%Y') %></td>
+  <td><%= movie.studio %></td>
+  <td><%= link_to t(:show), movie %></td>
+  <% if can? :edit, movie %>
+    <td><%= link_to t(:edit), edit_movie_path(movie) %></td>
+  <% end %>
+  <% if can? :destroy, movie %>
+    <td><%= link_to t(:destroy), movie, method: :delete, data: { confirm: t(:confirmation) } %></td>
+  <% end %>
+</tr>
