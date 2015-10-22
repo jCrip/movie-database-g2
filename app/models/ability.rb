@@ -11,11 +11,13 @@ class Ability
         can :update, [Movie, Review]
         can :destroy, [Movie, Review], user_id: user.id
         can [:set_genre, :set_genres], Movie
+        can :like, [Movie, Review]
     elsif user.basic?
         can :read, :all
         can :create, [Movie, Review]
         can [:update, :destroy], [Movie, Review], user_id: user.id
         can :set_genre, Movie, user_id: user.id
+        can :like, [Movie, Review]
     else
         can :read, :all
     end
