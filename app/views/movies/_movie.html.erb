@@ -2,7 +2,7 @@
   <% if can? :set_genres, Movie %>
     <td><%= check_box_tag 'movies_ids[]', movie.id %></td>
   <% end %>
-  <td><%= movie.title %></td>
+  <td><%= movie.title.upcase %></td>
   <td><%= movie.genres.join(', ') %></td>
   <td><%= time_tag movie.realease_date, movie.realease_date.strftime('%Y') %></td>
   <td><%= movie.studio %></td>
