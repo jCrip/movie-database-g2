@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  # before_action :set_movie, only: [:show, :edit, :update, :destroy, :set_genre]
+  # before_action :set_movie, only: [:show, :edit, :update, :destroy, :set_genre, :like]
 
   # before_action :authenticate_user!, except: [:index, :show]
   # before_action :check_editor!, only: [:edit, :update]
@@ -73,7 +73,6 @@ class MoviesController < ApplicationController
   end
 
   def set_genre
-
     if params.key?(:genres_ids) && !params[:genres_ids].empty?
       @genres = Genre.find(params[:genres_ids])
       @movie.genres = @genres
@@ -95,7 +94,19 @@ class MoviesController < ApplicationController
     else
       redirect_to root_path, alert: 'Tienes que seleccionar al menos un genero y una pelicula'
     end
+  end
 
+  def like
+    @like = @movie.likes.build(user: current_user)
+
+    if @movie.liked_by? current_user
+      @movie.remove_like current_user
+      redirect_to @movie, notice: 'Tu like a sido eliminado :('
+    elsif @movie.save
+      redirect_to @movie, notice: 'Gracias por tu like :D'
+    else
+      redirect_to @movie, notice: 'Tu like no se ha guardado :('
+    end
   end
 
   private
