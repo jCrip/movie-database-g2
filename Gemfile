@@ -10,6 +10,8 @@ gem 'devise'
 
 gem 'cancancan'
 
+gem 'rails_12factor'
+
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
