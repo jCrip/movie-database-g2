@@ -38,6 +38,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -45,7 +46,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'better_errors'
   gem 'quiet_assets'
-  gem 'faker'
 end
 
 group :development do
