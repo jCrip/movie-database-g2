@@ -9,9 +9,9 @@ class User < ActiveRecord::Base
   has_many :movies, dependent: :destroy
   has_many :reviews, dependent: :destroy
 
-  has_many :likes, as: :likeable
-  has_many :movie_likes, through: :likes, source: :movie
-  has_many :review_likes, through: :likes, source: :review
+  has_many :likes
+  has_many :movie_likes, through: :likes, source: :likeable, source_type: "Movie"
+  has_many :review_likes, through: :likes, source: :likeable, source_type: "Review"
 
   validates :username, uniqueness: { case_sensitive: false }
   validate :validate_username
