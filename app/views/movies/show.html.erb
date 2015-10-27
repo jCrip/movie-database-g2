@@ -27,7 +27,7 @@
 <p>Me Gusta: <strong><%= @movie.likes.count %></strong></p>
 
 <% if can? :like, Movie %>
-	<%= render partial: "likes/action" %>
+	<%= render partial: "likes/action", locals: {likable: @movie} %>
 <% end %>
 
 <% if can? :set_genre, @movie %>

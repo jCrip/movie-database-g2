@@ -1,4 +1,5 @@
 class Review < ActiveRecord::Base
+  include ApplicationHelper
   belongs_to :movie
   belongs_to :user
 
@@ -7,11 +8,4 @@ class Review < ActiveRecord::Base
 
   validates :content, presence: true
 
-  def remove_like user
-    self.likes.where(user: user).first.delete
-  end
-
-  def liked_by?(user)
-    self.user_likes.include? user
-  end
 end

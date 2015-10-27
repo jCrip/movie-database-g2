@@ -1,7 +1,7 @@
 <p>Dale me gusta:
-	<% unless @movie.liked_by? current_user %>
-		<%= link_to '+1', like_movie_path(@movie)  %>
+	<% unless likable.liked_by? current_user %>
+		<%= link_to '+1', like_movie_path(likable)  %>
 	<% else %>
-		<%= link_to '-1', like_movie_path(@movie)  %>
+		<%= link_to '-1', like_movie_path(likable)  %>
 	<% end %>
 </p>
