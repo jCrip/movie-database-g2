@@ -7,7 +7,7 @@ class Movie < ActiveRecord::Base
   has_many :movie_genres, dependent: :destroy
   has_many :genres, through: :movie_genres
 
-  has_many :likes, as: :likeable
+  has_many :likes, as: :likable
   has_many :user_likes, through: :likes, source: :user
 
   validates :title, presence: true

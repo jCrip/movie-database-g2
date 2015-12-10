@@ -18,3 +18,11 @@ ERROR:  cached plan must not change result type
 STATEMENT:  SELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1  ORDER BY "movies"."realease_date" DESC LIMIT 1
 ERROR:  cached plan must not change result type
 STATEMENT:  SELECT "reviews".* FROM "reviews" WHERE "reviews"."movie_id" = $1
+LOG:  database system was shut down at 2015-12-04 22:12:35 CLT
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+LOG:  received smart shutdown request
+LOG:  autovacuum launcher shutting down
+LOG:  shutting down
+LOG:  database system is shut down
