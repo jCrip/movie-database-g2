@@ -10,8 +10,20 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+
+    if params[:latitude].present?
+      lat = params[:latitude]
+      lng = params[:longitude]
+      @movies = Movie.near([lat, lng], 5)
+    else
+      @movies = Movie.all
+    end
     @genres = Genre.all
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /movies/1
@@ -36,7 +48,6 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     @movie.user = current_user if user_signed_in?
-
     respond_to do |format|
       if @movie.save
         format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
@@ -73,7 +84,7 @@ class MoviesController < ApplicationController
   end
 
   def set_genre
-    if params.key?(:genres_ids) && !params[:genres_ids].empty?
+    if params[:genres_ids].present?
       @genres = Genre.find(params[:genres_ids])
       @movie.genres = @genres
     else
@@ -84,7 +95,7 @@ class MoviesController < ApplicationController
   end
 
   def set_genres
-    if params.key?(:genres_ids) && !params[:genres_ids].empty? && params.key?(:movies_ids) && !params[:movies_ids].empty?
+    if params[:genres_ids].present? && params[:movies_ids].present?
       @movies = Movie.find(params[:movies_ids])
       @genres = Genre.find(params[:genres_ids])
       @movies.each do |movie|
@@ -117,6 +128,6 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:title, :description, :realease_date, :studio)
+      params.require(:movie).permit(:title, :description, :realease_date, :studio, :address, :city, :country, genres_ids: [] )
     end
 end

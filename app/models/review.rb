@@ -1,5 +1,5 @@
 class Review < ActiveRecord::Base
-  include ApplicationHelper
+  include Likes
   belongs_to :movie
   belongs_to :user
 

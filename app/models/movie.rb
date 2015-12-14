@@ -1,5 +1,7 @@
 class Movie < ActiveRecord::Base
-  include ApplicationHelper
+  include Likes
+  before_save :save_movie_genres, if: -> { genres_ids.present? }
+
   belongs_to :user
   has_many :reviews, dependent: :destroy
 
@@ -14,5 +16,22 @@ class Movie < ActiveRecord::Base
   validates :realease_date, presence: true
   validates :studio, presence: true
 
-  default_scope { order(realease_date: :desc) }
+  attr_accessor :genres_ids
+
+  def save_movie_genres
+    if genres_ids.present?
+      genres = Genre.find(genres_ids)
+      self.genres = genres
+    end
+  end
+
+  def full_address
+    "#{self.address}, #{self.city}, #{self.country}"
+  end
+
+  geocoded_by :full_address
+
+  after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
+
+  # default_scope { order(realease_date: :desc) }
 end

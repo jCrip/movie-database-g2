@@ -1,14 +1,14 @@
 <%= form_for(@movie) do |f| %>
   <% if @movie.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+  <div id="error_explanation">
+    <h2><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
 
-      <ul>
+    <ul>
       <% @movie.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <li><%= message %></li>
       <% end %>
-      </ul>
-    </div>
+    </ul>
+  </div>
   <% end %>
 
   <div class="field">
@@ -27,6 +27,27 @@
     <%= f.label :studio %><br>
     <%= f.text_field :studio %>
   </div>
+
+  <div class="field">
+    <%= f.collection_select(:genres_ids, Genre.all, :id, :name, {include_hidden: false, selected: @movie.genres.map {|g| g.id}}, {multiple: true} )%>
+    <%#= select(:movie, :genres_ids, Genre.all.map { |g| [g.name, g.id] }, {include_hidden: false, selected: @movie.genres.collect {|g| g.id} }, multiple: true) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address, "Address" %><br>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :city, "Ciudad" %><br>
+    <%= f.text_field :city %>
+  </div>
+
+  <div class="field">
+    <%= f.label :country, "Pais" %><br>
+    <%= f.text_field :country %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
